@@ -54,13 +54,15 @@ if (import.meta.vitest) {
   ];
 
   test('returns promotions by type', () => {
-    expect(getContractPromotionsByType(contracts)).toEqual({
+    const expected = {
       discount: [
         { type: 'discount', amount: 10 },
         { type: 'discount', amount: 20 },
         { type: 'discount', amount: 30 },
       ],
       'free-shipping': [{ type: 'free-shipping', amount: 5 }],
-    });
+    };
+
+    expect(getContractPromotionsByType(contracts)).toEqual(expected);
   });
 }

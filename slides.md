@@ -348,3 +348,136 @@ layout: center
   🧑‍💻 Exercises <strong class="text-6xl">02</strong>, <strong class="text-6xl">03</strong> and <strong class="text-6xl">04</strong>
   <div class="mt-5">⏰ 20 minutes</div>
 </h2>
+
+---
+layout: center
+---
+
+# Data Oriented Programming (DOP)
+
+<!-- ## What is DOP?
+
+<v-clicks>
+
+Data is a first-class citizen:
+
+</v-clicks>
+
+<v-clicks depth="2">
+
+* ✂️ Separation between data and behavior
+  * (Pure) functions for behavior
+  * No classes
+* <span text-cyan-600 mx-1>{}</span> Data is represented with generic data structures
+  * Primitives or arrays/objects
+  * No classes
+* 💎 Data is treated as immutable
+  * New versions of data are created
+  * Data isn't mutated in-place
+* 📄 Separate data shape from data value
+  * Define the "shape" of data using data
+  * Types don't have to be strict everywhere
+
+</v-clicks> -->
+
+<!--
+todo: work out:
+- At the edges of a system you need runtime validation, in the rest of the system types suffice
+- With DTOs schema and instance are complected
+
+Important realization: types don't have to be strict everywhere. Specific code needs stricter types than generic code.
+-->
+
+---
+
+<h2 mb-5>✂️ Separation between data and behavior</h2>
+
+<div flex gap-5>
+  <div flex-1>
+
+  ### OOP
+
+```ts
+class Player {
+  name: string;
+  position: Position;
+
+  move(newPosition: Position) {
+    this.position = newPosition;
+  }
+}
+```
+
+  <v-clicks>
+
+  * ✅ More control (data use is restricted)
+  * 🚫 Harder to reuse
+  * 🚫 Systems tend to be more complex
+  * 🚫 Less setup when testing
+
+  </v-clicks>
+
+  </div>
+  <div flex-1 v-click="5">
+
+  ### DOP
+
+```ts
+const playerState: PlayerState = {
+  name: string,
+  position: { x: 10, y: 20 },
+};
+
+function move(state: PlayerState, newPosition: Position) {
+  return {
+    ...state,
+    position: newPosition,
+  }
+}
+```
+
+  <v-clicks at="6">
+
+  * ✅ Easier reuse in different contexts
+  * ✅ Systems tends to be simpler
+  * ✅ Easier to test
+  * 🚫 Less encapsulation
+
+  </v-clicks>
+
+  </div>
+</div>
+
+---
+
+<h2 mb-13><span text-cyan-600 mx-1>{ }</span> Data is represented with generic data structures</h2>
+
+<blockquote v-click class="mt-3 !p-5">
+  <p class="text-2xl italic !mb-3">"It is better to have 100 functions operate on one data structure than to have 10 functions
+operate on 10 data structures."</p>
+  <footer class="!opacity-50">
+    — Alan Perlis (“Epigrams on Programming,” 1982)
+  </footer>
+</blockquote>
+
+<!--
+Array has `map`, `filter`, `reduce`. Why doesn't Object?
+-->
+
+---
+
+<h2 mb-5>💎 Data is treated as immutable</h2>
+
+<v-clicks>
+
+* Simple to reason about
+* Predictable behavior
+* Data changes stay local vs temporal/spatial mutations
+* Fast equality checks:
+    ```ts
+    function findContract(contract: Contract, contracts: Contract[]) {
+      return contracts.find((c) => c === contract);
+    }
+    ```
+
+</v-clicks>
