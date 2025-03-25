@@ -5,12 +5,24 @@
   "scripts": {
     "build": "slidev build",
     "dev": "slidev --open",
-    "export": "slidev export"
+    "export": "slidev export",
+    "test": "vitest"
   },
   "dependencies": {
     "@slidev/cli": "^51.4.0",
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest",
+    "remeda": "2.21.2",
+    "typescript": "5.8.2",
     "vue": "^3.5.13"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
+  "devDependencies": {
+    "@total-typescript/tsconfig": "1.0.4",
+    "vitest": "3.0.9"
   }
 }
